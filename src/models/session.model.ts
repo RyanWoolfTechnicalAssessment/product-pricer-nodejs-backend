@@ -13,11 +13,11 @@ export interface SessionDocument extends SessionInput, mongoose.Document {
     updatedAt: Date
 }
 
-const userSchema = new mongoose.Schema(
+export const sessionSchema = new mongoose.Schema(
     {
-        user: { type: mongoose.Schema.Types.ObjectId,ref:'User'},
-        valid:{type: Boolean,default: true},
-        userAgent:{type: String},
+        user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+        valid: { type: Boolean, default: true },
+        userAgent: { type: String },
     },
     {
         timestamps: true,
@@ -25,6 +25,6 @@ const userSchema = new mongoose.Schema(
 );
 
 
-const SessionModel = mongoose.model("Session",sessionSchema)
+export const SessionModel = mongoose.model<SessionDocument>("Session",sessionSchema)
 
 export default SessionModel
