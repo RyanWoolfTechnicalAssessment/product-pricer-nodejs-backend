@@ -34,12 +34,14 @@ export async function updateProductHandler(req: Request<UpdateProductInput["para
     logger.info(`product:${JSON.stringify(product)}`);
 
     if(String(product.user) != userId){
-        return res.sendStatus(403)
+        return res.sendStatus(401)
     }
 
     const updatedProduct = await findAndUpdateProduct({productId},update, {
         new:true,
     });
+
+    console.log(updatedProduct);
 
     return res.send(updatedProduct);
 }
@@ -48,11 +50,7 @@ export async function getProductHandler(req: Request<ReadProductInput["params"]>
     const productId = req.params.productId;
     const product = await findProduct({productId});
 
-    if(!product){
-        return res.sendStatus(404);
-    }
-
-    return res.send(product);
+    return product ? res.send(product) : res.sendStatus(404);
 }
 
 export async function deleteProductHandler(req: Request<DeleteProductInput["params"]>, res: Response){
@@ -67,7 +65,7 @@ export async function deleteProductHandler(req: Request<DeleteProductInput["para
     }
 
     if(String(product.user) != userId){
-        return res.sendStatus(403)
+        return res.sendStatus(401)
     }
 
     await deleteProduct({productId});

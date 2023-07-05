@@ -56,8 +56,8 @@ describe("user", () => {
             it("should return a 400", async() => {
                 const createUserServiceMock = jest
                     .spyOn(UserService,"createUser")
-                    // @ts-ignore
-                    .mockReturnValueOnce(userPayload);
+                    // // @ts-ignore
+                    // .mockReturnValueOnce(userPayload);
 
                 const { statusCode, body} = await supertest(app)
                     .post("/api/users")
