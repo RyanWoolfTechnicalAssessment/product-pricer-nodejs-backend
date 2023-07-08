@@ -1,7 +1,7 @@
 import * as UserService from '../service/user.service'
 import * as SessionService from '../service/session.service'
 import mongoose from "mongoose";
-import createServer from '../utils/server'
+import createServer from '../utils/app'
 import supertest from "supertest";
 import {createUserSessionHandler} from "../controller/session.controller";
 

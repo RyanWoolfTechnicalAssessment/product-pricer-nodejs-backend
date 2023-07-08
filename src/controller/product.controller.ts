@@ -34,7 +34,7 @@ export async function updateProductHandler(req: Request<UpdateProductInput["para
     logger.info(`product:${JSON.stringify(product)}`);
 
     if(String(product.user) != userId){
-        return res.sendStatus(401)
+        return res.sendStatus(403)
     }
 
     const updatedProduct = await findAndUpdateProduct({productId},update, {
@@ -65,7 +65,7 @@ export async function deleteProductHandler(req: Request<DeleteProductInput["para
     }
 
     if(String(product.user) != userId){
-        return res.sendStatus(401)
+        return res.sendStatus(403) //not enough permissions to perform an action (only the products user can update it)
     }
 
     await deleteProduct({productId});
